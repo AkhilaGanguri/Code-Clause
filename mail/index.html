@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mail-contact form</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>   
+<div class="container">
+    <div class="box">
+        <form id="form" onsubmit="sendemail(); return false;">
+            Name: <input type="text" name="name" id="name" placeholder="Enter your name"><br> 
+            Contact: <input type="number" name="contact" id="contact" placeholder="Enter your contact"><br>
+            Email: <input type="email" name="email" id="email" placeholder="Enter your email"><br>
+            Message:
+            <textarea name="msg" id="msg" cols="30" rows="10" placeholder="Enter the message"></textarea>
+            <button type="submit" class="btn">Send</button>
+        </form>
+    </div>
+</div>
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+    function sendemail() {
+        Email.send({
+            Host: "smtp.elasticemail.com",
+            Username: "ganguriakhila@gmail.com",
+            Password: "3CA0C01D0C2D6F6447A43238BE798B96BC80",
+            To: 'ganguriakhila@gmail.com',
+            From: document.getElementById("email").value,
+            Subject: "Message from " + document.getElementById("name").value,
+            Body: "Contact: " + document.getElementById("contact").value + "\n\n" + document.getElementById("msg").value
+        }).then(
+            message => alert("Mail sent successfully")
+        ).catch(
+            error => alert("Error: " + error)
+        );
+    }
+</script>
+</body>
+</html>
